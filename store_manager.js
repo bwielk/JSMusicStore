@@ -13,6 +13,7 @@ StoreManager.prototype = {
     return content.join('\n');
   },
 
+<<<<<<< HEAD
   inventoryValue: function(store){
     var total = 0;
     for(var item of store.inventory){
@@ -25,6 +26,8 @@ StoreManager.prototype = {
     return "" + store.name + " store: REPORT\nBalance: £" + store.balance + "\nInventory Value: £" + this.inventoryValue(store);
   }
 
+=======
+>>>>>>> a67685fc77aee2ff14ec2831ef45466189f9d398
 };
 
 module.exports = StoreManager;
