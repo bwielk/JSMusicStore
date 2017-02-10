@@ -4,7 +4,7 @@ var Record = require('../record');
 describe('RecordTest', function(){
   var cd1;
   beforeEach("Setup", function(){
-    cd1 = new Record("Eva Cassidy", "Songbird", 10);
+    cd1 = new Record("Eva Cassidy", "Songbird", 10, 5);
   }),
   it("should have artist", function(){
     is.equal("Eva Cassidy", cd1.artist);
@@ -14,5 +14,8 @@ describe('RecordTest', function(){
   }),
   it("should have price", function(){
     is.equal(10, cd1.price);
-  });
+  }),
+  it("should have a stock amount", function(){
+    is.equal(5, cd1.stock);
+  })
 });

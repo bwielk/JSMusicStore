@@ -11,12 +11,14 @@ RecordStore.prototype = {
   add: function(product){
     this.inventory.push(product)
   },
-  showInventory: function(){
-    var content = [];
-    for(var item of this.inventory){
-      content.push("artist: " + item.artist + ", title: " + item.title + ", price: " + item.price);
+
+  sell: function(product){
+    if(product.stock == 0){
+      return "Out of stock!"
+    }else{
+      this.balance += product.price;
+      product.stock -=1;
     }
-    return content.join('\n');
   }
 };
 
