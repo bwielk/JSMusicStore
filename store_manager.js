@@ -13,6 +13,18 @@ StoreManager.prototype = {
     return content.join('\n');
   },
 
+  inventoryValue: function(store){
+    var total = 0;
+    for(var item of store.inventory){
+      total += item.stock*item.price;
+    }
+    return total;
+  },
+
+  report: function(store){
+    return "" + store.name + " store: REPORT\nBalance: £" + store.balance + "\nInventory Value: £" + this.inventoryValue(store);
+  }
+
 };
 
 module.exports = StoreManager;
