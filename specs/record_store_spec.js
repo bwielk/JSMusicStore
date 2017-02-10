@@ -4,11 +4,12 @@ var Record = require('../record');
 
 describe("RecordStoreTest", function(){
   var store1;
+  var record1;
+  var record2;
   beforeEach("Setup", function(){
       store1 = new RecordStore("XXX", "Los Angeles");
-      record1 = new Record("Madonna", "Like A Prayer", 20);
-      record2 = new Record("Nirvana", "In Utero", 25);
-
+      record1 = new Record("Madonna", "Like A Prayer", 20, 11);
+      record2 = new Record("Nirvana", "In Utero", 25, 12);
     }),
   it("should have name", function(){
     is.equal("XXX", store1.name);
@@ -27,8 +28,24 @@ describe("RecordStoreTest", function(){
     store1.add(record2);
     is.equal(2, store1.inventory.length);
   }),
-  xit("should list the inventory", function(){
-    is.equal("artist: Madonna, title: Like A Prayer, price: 20\nartist: Nirvana, title: In Utero, price: 25\n",store1.showInventory());
-    console.log(store1.showInventory())
+  it("should sell records and update balance", function(){
+    store1.sell(record1);
+    store1.sell(record2);
+    store1.sell(record2);
+    is.equal(70, store1.balance);
+  }),
+  it("should decrease stock after sales", function(){
+    store1.sell(record1);
+    store1.sell(record2);
+    store1.sell(record2);
+    is.equal(record1.stock, 10);
+    is.equal(record2.stock, 10);
+  }),
+  
+  it("should inform that the record is out of stock", function(){
+    var record3 = new Record("David Bowie", "Aladin Sane", 30, 2);
+    store1.sell(record3);
+    store1.sell(record3);
+    is.equal("Out of stock!", store1.sell(record3));
   })
 });

@@ -1,7 +1,6 @@
 {
   "name": "music_store",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "mocha specs"
@@ -10,5 +9,14 @@
   "license": "ISC",
   "dependencies": {
     "mocha": "^3.2.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bwielk/JSMusicStore.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bwielk/JSMusicStore/issues"
+  },
+  "homepage": "https://github.com/bwielk/JSMusicStore#readme",
+  "description": ""
 }
