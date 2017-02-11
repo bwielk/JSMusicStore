@@ -13,9 +13,9 @@ describe("StoreManagerTest", function(){
   beforeEach("Setup", function(){
       manager = new StoreManager();
       store1 = new RecordStore("XXX", "Los Angeles");
-      record1 = new Record("Madonna", "Like A Prayer", 20, 11);
-      record2 = new Record("Nirvana", "In Utero", 25, 11);
-      record3 = new Record("David Bowie", "Aladin Sane", 30, 2);
+      record1 = new Record("Madonna", "Like A Prayer", 20, 11, "cvb123");
+      record2 = new Record("Nirvana", "In Utero", 25, 11, "asd345");
+      record3 = new Record("David Bowie", "Aladin Sane", 30, 2, "qwe123");
       store1.add(record1);
       store1.add(record2);
       store1.add(record3);
@@ -23,9 +23,8 @@ describe("StoreManagerTest", function(){
       store1.sell(record2);
     }),
 
-  xit("should list the inventory", function(){
-    is.equal("artist: Madonna, title: Like A Prayer, price: 20\nartist: Nirvana, title: In Utero, price: 25\n",manager.showInventory(store1));
-    console.log(store1.showInventory());
+  it("should list the inventory", function(){
+    is.equal("artist: Madonna, title: Like A Prayer, price: 20, stock: 10\nartist: Nirvana, title: In Utero, price: 25, stock: 10\nartist: David Bowie, title: Aladin Sane, price: 30, stock: 2", manager.showInventory(store1));
   }),
 
   it("should calculate the inventory value", function(){
@@ -34,7 +33,6 @@ describe("StoreManagerTest", function(){
 
   it("should report on the financial situation of the store", function(){
     is.equal("XXX store: REPORT\nBalance: £45\nInventory Value: £510", manager.report(store1));
-    console.log(manager.showInventory(store1));
   })
 });
 

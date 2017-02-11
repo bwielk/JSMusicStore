@@ -8,8 +8,8 @@ describe("RecordStoreTest", function(){
   var record2;
   beforeEach("Setup", function(){
       store1 = new RecordStore("XXX", "Los Angeles");
-      record1 = new Record("Madonna", "Like A Prayer", 20, 11);
-      record2 = new Record("Nirvana", "In Utero", 25, 12);
+      record1 = new Record("Madonna", "Like A Prayer", 20, 11, "gbh456");
+      record2 = new Record("Nirvana", "In Utero", 25, 12, "mnb098");
     }),
   it("should have name", function(){
     is.equal("XXX", store1.name);
@@ -41,7 +41,7 @@ describe("RecordStoreTest", function(){
     is.equal(record1.stock, 10);
     is.equal(record2.stock, 10);
   }),
-  
+
   it("should inform that the record is out of stock", function(){
     var record3 = new Record("David Bowie", "Aladin Sane", 30, 2);
     store1.sell(record3);
