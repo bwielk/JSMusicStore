@@ -38,8 +38,20 @@ describe("CustomerTest", function(){
     customer1.setFunds(100);
     customer1.buy(record1, store1);
     customer1.buy(record1, store1);
-    var item = customer1.getRecord("abc321")
+    customer1.buy(record1, store1);
+    var item = customer1.getRecord("abc321");
+    console.log(customer1);
+    is.equal(3, item.stock);
+    is.equal(1, customer1.boughtItems.length);
   }),
+
+  it("should be able to check if item exists", function(){
+    customer1.setFunds(60);
+    customer1.buy(record1, store1);
+    customer1.buy(record3, store1);
+    is.equal(false, customer1.hasRecord(record2));
+    is.equal(true, customer1.hasRecord(record1));
+  })
 
   it("should be able to pay for items and update funds", function(){
     customer1.setFunds(100);
@@ -82,28 +94,28 @@ describe("CustomerTest", function(){
     customer1.setFunds(10);
     is.equal("You cannot afford to buy this item", customer1.buy(record2, store1));
   }),
-/////////////////////////////TO PASS
-it("should be able to sell items and update funds", function(){
-  customer1.setFunds(100);
-  customer1.buy(record1, store1);
-  customer1.buy(record2, store1);
-  customer1.setPrice("abc321", 10);
-  customer1.sell("abc321");
-  is.equal(65, customer1.funds);
-}),
 
-it("should be able to sell therefore the stock decreases", function(){
-  customer1.setFunds(20);
-  customer1.buy(record1, store1);
-  customer1.sell("abc321");
-  var item = customer1.getRecord("abc321");
-  is.equal(0, item.stock);
-}),
+  it("should be able to sell items and update funds", function(){
+    customer1.setFunds(100);
+    customer1.buy(record1, store1);
+    customer1.buy(record2, store1);
+    customer1.setPrice("abc321", 10);
+    customer1.sell("abc321");
+    is.equal(65, customer1.funds);
+  }),
 
-it("shouldn't be able to sell if it the item stock equals 0", function(){
-  customer1.setFunds(30);
-  customer1.buy(record3, store1);
-  customer1.sell("zxc098");
-  is.equal("You have sold out this record!", customer1.sell("zxc098"));
-})
+  it("should be able to sell therefore the stock decreases", function(){
+    customer1.setFunds(20);
+    customer1.buy(record1, store1);
+    customer1.sell("abc321");
+    var item = customer1.getRecord("abc321");
+    is.equal(0, item.stock);
+  }),
+
+  it("shouldn't be able to sell if it the item stock equals 0", function(){
+    customer1.setFunds(30);
+    customer1.buy(record3, store1);
+    customer1.sell("zxc098");
+    is.equal("You have sold out this record!", customer1.sell("zxc098"));
+  })
 });

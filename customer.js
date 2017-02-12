@@ -10,6 +10,15 @@ Customer.prototype = {
   this.funds = value_of_funds;
 },
 
+hasRecord: function(product){
+  var lookupId = product.id;
+  var item = this.getRecord(lookupId);
+  if(lookupId === item.id){
+    return true;
+  }
+  return false;
+},
+
 getRecord: function(id){
 //   for(var i = 0; i<this.boughtItems.length; i+=1){
 //     if(this.boughtItems[i].id === id){
@@ -25,13 +34,18 @@ getRecord: function(id){
   }
   return "The item doesn't exist";
 },
-///////////////////////////////UPDATE STOCK IF YOU BUY THE SAME ALBUM
+
 buy: function(product, store){
   if(this.funds >= product.price){
     store.sell(product);
-    var itemToBuy = new Record(product.artist, product.title, product.price, 1, product.id);
-    this.boughtItems.push(itemToBuy);
-    this.funds -= itemToBuy.price;
+    if(this.hasRecord(product)){
+      var record = this.getRecord(product.id);
+      record.stock += 1;
+    }else{
+      var itemToBuy = new Record(product.artist, product.title, product.price, 1, product.id);
+      this.boughtItems.push(itemToBuy);
+    }
+    this.funds -= product.price;
   }else{
     return "You cannot afford to buy this item";
   }
