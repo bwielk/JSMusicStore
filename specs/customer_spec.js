@@ -40,30 +40,41 @@ describe("CustomerTest", function(){
       is.equal(80, customer1.funds);
     }),
 
-    it("should get record by its id", function(){
+ it("should get record by its id", function(){
       customer1.setFunds(100);
       customer1.buy(record1, store1);
       customer1.buy(record2, store1);
-      console.log(customer1);
-      is.equal("Nirvana", customer1.getRecord("xyz123").artist);
+      var item = customer1.getRecord("xyz123");
+      is.equal("Nirvana", item.artist);
     }),
+   
+
+    it("should pop out a communicate if there is no such item", function(){
+      customer1.setFunds(100);
+      customer1.buy(record1, store1);
+      customer1.buy(record2, store1);
+      is.equal("The item doesn't exist", customer1.getRecord("aaaa"));
+    })
 
     it("should update the stock of a record after customer's purchase of the record", function() {
-      customer1.boughtItems = [];
+      customer1.setFunds(100);
       customer1.buy(record2, store1);
-      var item = customer1.boughtItems[0];
+      var item = customer1.getRecord('xyz123');
       is.equal(1, item.stock);
     }),
 
-    xit("should be able to update price of bought item", function(){
-      customer1.setPrice(item, 10);
-      var item = customer1.getProduct(item);
+    it("should be able to update price of bought item", function(){
+      customer1.setFunds(100)
+      customer1.buy(record2, store1);
+      customer1.setPrice('xyz123', 10);
+      var item = customer1.getRecord('xyz123');
       is.equal(10, item.price);
     }),
 
-    xit("should be able to sell items and update funds", function(){
+    it("should be able to sell items and update funds", function(){
+      customer1.setFunds(80);
       customer1.sell(record1);
-      is.equal(90, customer1.funds);
+      is.equal(100, customer1.funds);
     }),
 
     it("shoulnd't be able to buy a record if he cannot afford it", function(){
