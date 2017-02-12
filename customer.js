@@ -25,7 +25,7 @@ getRecord: function(id){
   }
   return "The item doesn't exist";
 },
-
+///////////////////////////////UPDATE STOCK IF YOU BUY THE SAME ALBUM
 buy: function(product, store){
   if(this.funds >= product.price){
     store.sell(product);
@@ -37,7 +37,8 @@ buy: function(product, store){
   }
 },
 
-sell: function(product){
+sell: function(id){
+  var product = this.getRecord(id);
   if(product.stock == 0){
     return "You have sold out this record!";
   }else{
